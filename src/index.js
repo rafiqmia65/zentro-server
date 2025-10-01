@@ -9,6 +9,7 @@ connectDb();
 
 app.listen(port, () => {
   console.log(`🚀 Zentro Place app listening on port ${port}`);
+  console.log('This is for development purpose');
 });
 
 // development branch
