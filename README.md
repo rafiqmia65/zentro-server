@@ -1,3 +1,4 @@
+````markdown
 # 🏡 Zentro - Real Estate Application Backend
 
 Zentro is a backend service for a modern **real estate application**, built with **Node.js**, **Express.js**, and **MongoDB (Mongoose)**.  
@@ -24,6 +25,7 @@ zentro-server/
 ├── vercel.json         # Vercel deployment config
 └── README.md           # Project documentation
 ```
+````
 
 ---
 
@@ -33,6 +35,7 @@ zentro-server/
 
 ```bash
 git clone https://github.com/rafiqmia65/zentro-server.git
+cd zentro-server
 ```
 
 ### 2. Install Dependencies
@@ -68,18 +71,18 @@ npm run dev
 npm start
 ```
 
-Server will start at:  
+Server will start at:
 👉 `http://localhost:5000`
 
 ---
 
 ## 📦 Available Scripts
 
-| Command          | Description                       |
-| ---------------- | --------------------------------- |
-| `npm run dev`    | Run server with nodemon (dev)     |
-| `npm start`      | Run server in production mode     |
-| `npm test`       | Run test suite (if available)     |
+| Command       | Description                   |
+| ------------- | ----------------------------- |
+| `npm run dev` | Run server with nodemon (dev) |
+| `npm start`   | Run server in production mode |
+| `npm test`    | Run test suite (if available) |
 
 ---
 
@@ -100,22 +103,25 @@ Server will start at:
 ## 🔐 API Features
 
 ### Authentication & Users
--  User registration & login
--  JWT-based authentication
--  Protected routes
--  User profile management
+
+- User registration & login
+- JWT-based authentication
+- Protected routes
+- User profile management
 
 ### Property Management
--  Create, read, update, delete properties
--  Property search and filtering
--  Image upload support
--  Property categories and types
+
+- Create, read, update, delete properties
+- Property search and filtering
+- Image upload support
+- Property categories and types
 
 ### Advanced Features
--  Favorites system
--  Property reviews and ratings
--  Advanced search with filters
--  Pagination support
+
+- Favorites system
+- Property reviews and ratings
+- Advanced search with filters
+- Pagination support
 
 ---
 
@@ -131,7 +137,7 @@ Server will start at:
 
 ---
 
-## 👨‍💻 Development Team
+## 👨‍💻 Development Team - Alpha
 
 | Role           | Name / GitHub Profile                                |
 | -------------- | ---------------------------------------------------- |
@@ -148,12 +154,14 @@ To maintain code quality and avoid conflicts, **every team member must work on f
 ### 🪄 Step-by-Step Development Guide:
 
 1. **Always start with the latest main branch:**
+
    ```bash
    git checkout main
    git pull origin main
    ```
 
 2. **Create a new feature branch:**
+
    ```bash
    git checkout -b feature/your-feature-name
    # or
@@ -161,6 +169,7 @@ To maintain code quality and avoid conflicts, **every team member must work on f
    ```
 
 3. **Make your changes and commit:**
+
    ```bash
    git add .
    git commit -m "feat: add property search functionality"
@@ -173,17 +182,20 @@ To maintain code quality and avoid conflicts, **every team member must work on f
    ```
 
 4. **Push your branch to GitHub:**
+
    ```bash
    git push origin feature/your-feature-name
    ```
 
 5. **Create a Pull Request (PR):**
+
    - Go to GitHub repository
    - Create PR from your branch to `main`
    - Add description of changes
    - Request review from team members
 
 6. **After PR approval:**
+
    - Team lead will merge the PR
    - Delete the feature branch
 
@@ -205,10 +217,19 @@ git rebase origin/main
 ## 🐛 Issue Reporting
 
 Found a bug? Please create an issue with:
+
 - Clear description of the problem
 - Steps to reproduce
 - Expected vs actual behavior
 - Screenshots if applicable
+
+---
+
+## 🌐 Links
+
+- **GitHub Repository (Backend):** [https://github.com/rafiqmia65/zentro-server](https://github.com/rafiqmia65/zentro-server)
+- **Vercel Deployment (Backend):** [https://zentro-server.vercel.app](https://zentro-server.vercel.app)
+- **Live Frontend Link:** [https://zentro-place.vercel.app](https://zentro-place.vercel.app)
 
 ---
 
@@ -221,6 +242,7 @@ This project is licensed under the **ISC License**.
 ## 🤝 Contributing
 
 We welcome contributions! Please:
+
 1. Fork the repository
 2. Create your feature branch
 3. Follow the coding standards
@@ -230,5 +252,3 @@ We welcome contributions! Please:
 ---
 
 💡 **Zentro** — Building the future of real estate technology, one line of code at a time.
-
----
