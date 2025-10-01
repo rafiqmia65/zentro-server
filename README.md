@@ -1,31 +1,30 @@
 ````markdown
 # 🏡 Zentro - Real Estate Application Backend
 
-Zentro is a robust backend service for modern **real estate applications**, built with **Node.js**, **Express.js**, and **MongoDB (Mongoose)**.  
-It powers the core functionalities of the Zentro platform including property management, user authentication, and comprehensive API endpoints.
+Zentro is a **robust backend service** for modern real estate applications, built with **Node.js**, **Express.js**, and **MongoDB (Mongoose)**.  
+It powers the core functionalities of the Zentro platform, including **property management**, **user authentication**, and **comprehensive API endpoints**.
 
 ---
 
 ## 📁 Project Structure
 
-```bash
 zentro-server/
-├── src/
-│   ├── config/         # Database connection & environment configurations
-│   ├── controllers/    # Business logic & request handlers
-│   ├── middlewares/    # Authentication, error handling, validation
-│   ├── models/         # Mongoose schemas and data models
-│   ├── routes/         # API route definitions
-│   ├── app.js          # Express application setup
-│   └── index.js        # Server entry point
-├── .env                # Environment variables (excluded from version control)
-├── .env.example        # Environment variables template
-├── .gitignore          # Git ignore rules
-├── package.json        # Project dependencies and scripts
-├── vercel.json         # Vercel deployment configuration
-└── README.md           # Project documentation
-```
-````
+├─ src/
+│ ├─ config/ 🔧 Database connection & environment configs
+│ ├─ controllers/ 📝 Business logic & request handlers
+│ ├─ middlewares/ 🛡️ Authentication, error handling & validation
+│ ├─ models/ 📦 Mongoose schemas & data models
+│ ├─ routes/ 🌐 API route definitions
+│ ├─ app.js ⚡ Express application setup
+│ └─ index.js 🚀 Server entry point
+├─ .env 🔑 Environment variables (not committed)
+├─ .env.example 📄 Environment variables template
+├─ .gitignore ❌ Files & folders to ignore in Git
+├─ package.json 📦 Project dependencies & scripts
+├─ vercel.json ☁️ Vercel deployment configuration
+└─ README.md 📖 Project documentation
+
+---
 
 ---
 
@@ -37,6 +36,7 @@ zentro-server/
 git clone https://github.com/rafiqmia65/zentro-server.git
 cd zentro-server
 ```
+````
 
 ### 2. Install Dependencies
 
@@ -245,4 +245,3 @@ We welcome community contributions! Please:
 ---
 
 💡 **Zentro** — Revolutionizing real estate technology through innovative software solutions.
-
