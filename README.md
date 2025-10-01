@@ -1,42 +1,40 @@
-````markdown
 # 🏡 Zentro - Real Estate Application Backend
 
-Zentro is a **robust backend service** for modern real estate applications, built with **Node.js**, **Express.js**, and **MongoDB (Mongoose)**.  
-It powers the core functionalities of the Zentro platform, including **property management**, **user authentication**, and **comprehensive API endpoints**.
+Zentro is a backend service for a modern **real estate application**, built with **Node.js**, **Express.js**, and **MongoDB (Mongoose)**.  
+It powers the core functionalities of the Zentro platform such as property management, user authentication, and API endpoints for the frontend.
 
 ---
 
 ## 📁 Project Structure
 
+```bash
 zentro-server/
-├─ src/
-│ ├─ config/ 🔧 Database connection & environment configs
-│ ├─ controllers/ 📝 Business logic & request handlers
-│ ├─ middlewares/ 🛡️ Authentication, error handling & validation
-│ ├─ models/ 📦 Mongoose schemas & data models
-│ ├─ routes/ 🌐 API route definitions
-│ ├─ app.js ⚡ Express application setup
-│ └─ index.js 🚀 Server entry point
-├─ .env 🔑 Environment variables (not committed)
-├─ .env.example 📄 Environment variables template
-├─ .gitignore ❌ Files & folders to ignore in Git
-├─ package.json 📦 Project dependencies & scripts
-├─ vercel.json ☁️ Vercel deployment configuration
-└─ README.md 📖 Project documentation
+├── src/
+│   ├── config/         # Database connection & environment configs
+│   ├── controllers/    # Business logic & request handlers
+│   ├── middlewares/    # Authentication, error handling, etc.
+│   ├── models/         # Mongoose schemas and models
+│   ├── routes/         # API routes
+│   ├── app.js          # Express application setup
+│   └── index.js        # Entry point of the backend server
+├── .env                # Environment variables (not committed)
+├── .env.example        # Environment variables template
+├── .gitignore          # Git ignore rules
+├── package.json        # Dependencies and scripts
+├── vercel.json         # Vercel deployment config
+└── README.md           # Project documentation
+```
 
 ---
 
----
+## 🚀 Getting Started
 
-## 🚀 Quick Start Guide
-
-### 1. Clone Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/rafiqmia65/zentro-server.git
 cd zentro-server
 ```
-````
 
 ### 2. Install Dependencies
 
@@ -44,13 +42,15 @@ cd zentro-server
 npm install
 ```
 
-### 3. Configure Environment
+### 3. Setup Environment Variables
+
+Copy the example environment file and update with your values:
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` file with your configurations:
+Edit the `.env` file:
 
 ```env
 PORT=5000
@@ -59,168 +59,173 @@ JWT_SECRET=your_jwt_secret_key_here
 NODE_ENV=development
 ```
 
-### 4. Launch Server
+### 4. Run the Server
 
 ```bash
-# Development mode with hot reload
+# Development mode (with auto-reload)
 npm run dev
 
 # Production mode
 npm start
 ```
 
-**Server running at:** `http://localhost:5000`
+Server will start at:  
+👉 `http://localhost:5000`
 
 ---
 
-## 📦 Script Commands
+## 📦 Available Scripts
 
-| Command       | Description                           |
-| ------------- | ------------------------------------- |
-| `npm run dev` | Start development server with nodemon |
-| `npm start`   | Start production server               |
-| `npm test`    | Execute test suite                    |
-
----
-
-## 🛠️ Technology Stack
-
-- **Runtime:** Node.js
-- **Framework:** Express.js
-- **Database:** MongoDB with Mongoose ODM
-- **Authentication:** JWT Tokens
-- **Security:** bcryptjs, helmet, CORS
-- **Environment:** dotenv
+| Command       | Description                   |
+| ------------- | ----------------------------- |
+| `npm run dev` | Run server with nodemon (dev) |
+| `npm start`   | Run server in production mode |
+| `npm test`    | Run test suite (if available) |
 
 ---
 
-## 🔐 Core API Features
+## 🛠️ Tech Stack
 
-### 👤 Authentication & User Management
+- **Node.js** – JavaScript runtime
+- **Express.js** – Web framework
+- **MongoDB** – NoSQL database
+- **Mongoose** – ODM for MongoDB
+- **JWT** – Authentication tokens
+- **bcryptjs** – Password hashing
+- **cors** – Cross-origin resource sharing
+- **dotenv** – Environment variables
+- **helmet** – Security headers
 
-- User registration and login system
+---
+
+## 🔐 API Features
+
+### Authentication & Users
+
+- User registration & login
 - JWT-based authentication
-- Protected route middleware
+- Protected routes
 - User profile management
 
-### 🏠 Property Management
+### Property Management
 
-- Complete CRUD operations for properties
-- Advanced search and filtering
+- Create, read, update, delete properties
+- Property search and filtering
 - Image upload support
-- Category and type classification
+- Property categories and types
 
-### ⭐ Enhanced Features
+### Advanced Features
 
-- Favorites and wishlist system
+- Favorites system
 - Property reviews and ratings
-- Advanced filtering with pagination
-- Search optimization
+- Advanced search with filters
+- Pagination support
 
 ---
 
-## 🚀 Planned Enhancements
+## 🧭 Future Enhancements
 
 - 📊 Admin dashboard APIs
-- 📍 Geolocation-based search
-- 💬 Real-time messaging system
-- 📱 Push notification service
-- 💳 Payment gateway integration
-- 📈 Analytics and reporting tools
-- 🔍 AI-powered recommendation engine
+- 📍 Location-based search
+- 💬 Real-time chat system
+- 📱 Push notifications
+- 💳 Payment integration
+- 📈 Analytics and reporting
+- 🔍 Advanced search with AI recommendations
 
 ---
 
 ## 👨‍💻 Development Team - Alpha
 
-| Role           | Team Member    | GitHub Profile                                         |
-| -------------- | -------------- | ------------------------------------------------------ |
-| 🧠 Team Leader | Arun Roy       | [@ArunRoy404](https://github.com/ArunRoy404)           |
-| 🤝 Co-Leader   | Md Rafiq Mia   | [@rafiqmia65](https://github.com/rafiqmia65)           |
-| 👨‍💻 Core Member | Abdul Al Roman | [@Abdulal-Roman09](https://github.com/Abdulal-Roman09) |
+| Role           | Name / GitHub Profile                                |
+| -------------- | ---------------------------------------------------- |
+| 🧠 Team Leader | [Arun Roy](https://github.com/ArunRoy404)            |
+| 🤝 Co-Leader   | [Md Rafiq Mia](https://github.com/rafiqmia65)        |
+| 👨‍💻 Core Member | [Abdul Al Roman](https://github.com/Abdulal-Roman09) |
 
 ---
 
-## 🌿 Development Workflow & Branch Strategy
+## 🌿 Team Workflow & Branching Strategy
 
-Maintain code quality and minimize conflicts by following our branching strategy.
+To maintain code quality and avoid conflicts, **every team member must work on feature branches**.
 
-### 🪄 Development Process:
+### 🪄 Step-by-Step Development Guide:
 
-1. **Sync with Main Branch**
+1. **Always start with the latest main branch:**
 
    ```bash
    git checkout main
    git pull origin main
    ```
 
-2. **Create Feature Branch**
+2. **Create a new feature branch:**
 
    ```bash
-   git checkout -b feature/descriptive-feature-name
-   # or for bug fixes:
+   git checkout -b feature/your-feature-name
+   # or
    git checkout -b fix/issue-description
    ```
 
-3. **Commit Changes**
+3. **Make your changes and commit:**
 
    ```bash
    git add .
-   git commit -m "feat: implement property search functionality"
-   # Conventional commit prefixes:
-   # feat: - new features
-   # fix: - bug resolutions
-   # docs: - documentation
-   # style: - formatting
-   # refactor: - code improvements
+   git commit -m "feat: add property search functionality"
+   # Use conventional commit messages:
+   # feat: for new features
+   # fix: for bug fixes
+   # docs: for documentation
+   # style: for formatting
+   # refactor: for code refactoring
    ```
 
-4. **Push to Repository**
+4. **Push your branch to GitHub:**
 
    ```bash
    git push origin feature/your-feature-name
    ```
 
-5. **Create Pull Request**
+5. **Create a Pull Request (PR):**
 
-   - Navigate to GitHub repository
-   - Initiate PR from feature branch to `main`
-   - Provide comprehensive change description
-   - Request team code review
+   - Go to GitHub repository
+   - Create PR from your branch to `main`
+   - Add description of changes
+   - Request review from team members
 
-6. **Post-Approval**
-   - Team lead merges approved PR
-   - Feature branch deletion
+6. **After PR approval:**
+   - Team lead will merge the PR
+   - Delete the feature branch
 
-### 🔄 Synchronization Commands:
+### 🔄 Sync Your Local Repository:
 
 ```bash
-# Fetch latest main branch updates
+# Fetch latest changes from main
 git fetch origin
 
-# Rebase feature branch
+# Rebase your feature branch
 git checkout feature/your-feature-name
 git rebase origin/main
 
-# Resolve any merge conflicts
+# Resolve any conflicts if they occur
 ```
 
 ---
 
-## 🐛 Issue Reporting Template
+## 🐛 Issue Reporting
 
-Encountered an issue? Please include:
+Found a bug? Please create an issue with:
 
-- **Description:** Clear problem explanation
-- **Reproduction Steps:** Sequential reproduction guide
-- **Expected vs Actual:** Behavior comparison
-- **Visual Evidence:** Screenshots if applicable
+- Clear description of the problem
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots if applicable
 
 ---
 
 ## 🌐 Project Links
 
 - **Backend Repository:** [https://github.com/rafiqmia65/zentro-server](https://github.com/rafiqmia65/zentro-server)
+- **Frontend Repository:** [https://github.com/ArunRoy404/zentro-client](https://github.com/ArunRoy404/zentro-client)
 - **API Deployment:** [https://zentro-server.vercel.app](https://zentro-server.vercel.app)
 - **Frontend Application:** [https://zentro-place.vercel.app](https://zentro-place.vercel.app)
 
@@ -228,20 +233,22 @@ Encountered an issue? Please include:
 
 ## 📜 License
 
-Licensed under the **ISC License**.
+This project is licensed under the **ISC License**.
 
 ---
 
-## 🤝 Contribution Guidelines
+## 🤝 Contributing
 
-We welcome community contributions! Please:
+We welcome contributions! Please:
 
 1. Fork the repository
-2. Create feature branches
-3. Adhere to coding standards
-4. Include tests where applicable
-5. Submit detailed pull requests
+2. Create your feature branch
+3. Follow the coding standards
+4. Add tests if applicable
+5. Submit a pull request
 
 ---
 
-💡 **Zentro** — Revolutionizing real estate technology through innovative software solutions.
+💡 **Zentro** — Building the future of real estate technology, one line of code at a time.
+
+---
