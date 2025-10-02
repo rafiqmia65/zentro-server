@@ -35,3 +35,21 @@ export const createProperty = async (req, res) => {
     });
   }
 };
+export const getAllProperty = async (req, res) => {
+  try {
+    const allProperty = await Property.find().sort({ createdAt: -1 });
+    if (!allProperty) {
+      return res.status({ message: "property is not found" });
+    }
+    return res.status(201).json({
+      success: true,
+      message: "Property get successfully",
+      data: allProperty,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
