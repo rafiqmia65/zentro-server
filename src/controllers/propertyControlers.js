@@ -120,7 +120,35 @@ export const updateProperty = async (req, res) => {
       data: updatedProperty,
     });
   } catch (error) {
-  return res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
 
+// delete a property
+export const deleteProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Check if property exists
+    const existingProperty = await PropertyModel.findById(id);
+    if (!existingProperty) {
+      return res.status(404).json({
+        success: false,
+        message: "Property not found",
+      });
+    }
+
+    // Delete the property
+    await PropertyModel.findByIdAndDelete(id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Property deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };

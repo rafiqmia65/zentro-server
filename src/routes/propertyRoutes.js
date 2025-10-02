@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createProperty,
+  deleteProperty,
   getAllProperty,
   singleProperty,
   updateProperty,
@@ -19,5 +20,8 @@ router.get("/get-single-property/:id", singleProperty);
 
 // update property by id
 router.patch("/update-property/:id", updateProperty);
+
+// DELETE property by ID
+router.delete("/delete-property/:id", deleteProperty);
 
 export default router;
