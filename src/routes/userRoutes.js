@@ -20,12 +20,12 @@ router.post("/", createUser);
 router.get("/", getUsers);
 
 // Get single user by ID
-router.get("/:id", getUserById);
+router.get("/users/:id", getUserById);
 
 // Update a user by ID
-router.patch("/:id", updateUser);
+router.patch("/users/:id", updateUser);
 
 // Delete a user by ID
-router.delete("/:id", deleteUser);
+router.delete("/users/:id", deleteUser);
 
 export default router;
