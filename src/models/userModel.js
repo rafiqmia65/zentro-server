@@ -1,5 +1,7 @@
-import { Schema, model, models } from "mongoose";
+import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+
+const { Schema, model, models } = mongoose;
 
 // -----------------------------
 // Create the User schema
@@ -44,7 +46,7 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "customer","agent"],
+      enum: ["admin", "customer", "agent"],
       default: "customer",
     },
     accountCreatedAt: {
