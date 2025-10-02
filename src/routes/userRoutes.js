@@ -5,6 +5,7 @@ import {
   getUserById,
   updateUser,
   deleteUser,
+  loginUser,
 } from "../controllers/userControlers.js";
 
 const router = express.Router();
@@ -18,6 +19,9 @@ router.post("/", createUser);
 
 // Get all users
 router.get("/", getUsers);
+
+// SignIn
+router.get("/signin", loginUser);
 
 // Get single user by ID
 router.get("/:id", getUserById);
