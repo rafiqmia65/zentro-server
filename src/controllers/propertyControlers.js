@@ -1,11 +1,12 @@
-import Property from "../models/propertyModel.js";
+import PropertyModel from "../models/propertyModel.js";
 
+//  Create Property
 export const createProperty = async (req, res) => {
   try {
     const propertyData = req.body;
 
-    // Check if property already exists
-    const existingProperty = await Property.findOne({
+    // 🔍 Check if property already exists in the same city
+    const existingProperty = await PropertyModel.findOne({
       title: propertyData.title,
       "location.city": propertyData.location.city,
     });
@@ -17,10 +18,10 @@ export const createProperty = async (req, res) => {
       });
     }
 
-    // Create a new property instance
-    const newProperty = new Property(propertyData);
+    //  Create a new property instance
+    const newProperty = new PropertyModel(propertyData);
 
-    // Save property in MongoDB
+    //  Save property to MongoDB
     await newProperty.save();
 
     return res.status(201).json({
@@ -35,16 +36,54 @@ export const createProperty = async (req, res) => {
     });
   }
 };
+
+//  Get All Properties
 export const getAllProperty = async (req, res) => {
   try {
-    const allProperty = await Property.find().sort({ createdAt: -1 });
-    if (!allProperty) {
-      return res.status({ message: "property is not found" });
+    //  Get all properties sorted by latest created
+    const allProperty = await PropertyModel.find().sort({ createdAt: -1 });
+
+    // If no properties found
+    if (!allProperty || allProperty.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No properties found",
+      });
     }
-    return res.status(201).json({
+
+    return res.status(200).json({
       success: true,
-      message: "Property get successfully",
+      message: "Properties retrieved successfully",
       data: allProperty,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+//  Get Single Property
+export const singleProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find property by ID
+    const singleProperty = await PropertyModel.findById(id);
+
+    //  If property not found
+    if (!singleProperty) {
+      return res.status(404).json({
+        success: false,
+        message: "Property not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Single property retrieved successfully",
+      data: singleProperty,
     });
   } catch (error) {
     return res.status(500).json({
