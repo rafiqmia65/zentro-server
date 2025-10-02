@@ -92,3 +92,35 @@ export const singleProperty = async (req, res) => {
     });
   }
 };
+
+// update Property
+export const updateProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+    //  Check if property exists
+    const existingProperty = await PropertyModel.findById(id);
+
+    if (!existingProperty) {
+      return res.status(404).json({
+        success: false,
+        message: "Property not found",
+      });
+    }
+    //  Update property with new data
+    const updatedProperty = await PropertyModel.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Property updated successfully",
+      data: updatedProperty,
+    });
+  } catch (error) {
+  return res.status(500).json({ success: false, message: error.message });
+
+  }
+};
