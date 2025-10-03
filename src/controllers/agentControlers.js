@@ -88,6 +88,33 @@ export const getSingleAgent = async (req, res) => {
   }
 };
 
+// update agent
+export const updateAgent = async (req, res) => {
+  try {
+    const { agentId } = req.params;
+    const updateData = req.body;
+
+    // Find agent by ID and update
+    const updatedAgent = await agentModel.findByIdAndUpdate(
+      agentId,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedAgent) {
+      return res.status(404).json({ message: "Agent not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Agent updated successfully",
+      data: updatedAgent,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 // delete agent id
 export const deleteAgent = async (req, res) => {
   try {
