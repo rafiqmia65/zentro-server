@@ -1,5 +1,5 @@
 import agentModel from "../models/agentModel.js";
-import userModel from "../models/userModel.js"; 
+import userModel from "../models/userModel.js";
 
 // Create a new Agent (for logged-in user)
 export const createAgent = async (req, res) => {
@@ -44,6 +44,22 @@ export const createAgent = async (req, res) => {
       success: true,
       message: "Agent application successful and role updated",
       data: agent,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+// get All Agants
+
+export const getAllAgent = async (req, res) => {
+  try {
+    const agents = await agentModel.find().populate("userId");
+
+    return res.status(200).json({
+      success: true,
+      count: agents.length,
+      data: agents,
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });

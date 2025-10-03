@@ -1,8 +1,12 @@
 import express from "express";
-import { createAgent } from "../controllers/agentControlers.js";
+import { createAgent, getAllAgent } from "../controllers/agentControlers.js";
 
 const router = express.Router();
 
-router.post('/:userId/add-agent',createAgent)
+// crate a agent
+router.post("/:userId/add-agent", createAgent);
+
+// get all agent
+router.get("/get-all-agent", getAllAgent);
 
 export default router;
