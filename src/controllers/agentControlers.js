@@ -87,3 +87,29 @@ export const getSingleAgent = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+// delete agent id
+export const deleteAgent = async (req, res) => {
+  try {
+    const { agentId } = req.params;
+
+    // Find agent by ID
+    const agent = await agentModel.findById(agentId);
+    if (!agent) {
+      return res.status(404).json({ message: "Agent not found" });
+    }
+
+    // Delete agent
+    await agentModel.findByIdAndDelete(agentId);
+
+    // Optionally, update user role back to "user"
+    await userModel.findByIdAndUpdate(agent.userId, { role: "user" });
+
+    return res.status(200).json({
+      success: true,
+      message: "Agent deleted and user role reverted to 'user'",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
