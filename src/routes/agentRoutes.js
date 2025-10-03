@@ -9,7 +9,6 @@ import {
 
 const router = express.Router();
 
-// app.use("/api/v1/agent", AgentRoutes);
 
 // crate a agent
 router.post("/:userId/add-agent", createAgent);
