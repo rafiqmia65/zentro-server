@@ -35,7 +35,7 @@ const agentSchema = new Schema(
     contactInfo: {
       officeAddress: {
         type: String,
-        default: "",
+        required: true,
       },
     },
   },

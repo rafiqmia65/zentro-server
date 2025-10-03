@@ -1,6 +1,8 @@
+import express from "express";
+import { createAgent } from "../controllers/agentControlers.js";
 
-import  express  from 'express';
+const router = express.Router();
 
-const router=express.Router()
+router.post('/:userId/add-agent',createAgent)
 
-export default router
+export default router;
