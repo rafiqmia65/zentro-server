@@ -21,7 +21,7 @@ router.post("/", createUser);
 router.get("/", getUsers);
 
 // SignIn
-router.get("/signin", loginUser);
+router.post("/signin", loginUser);
 
 // Get single user by ID
 router.get("/:id", getUserById);
