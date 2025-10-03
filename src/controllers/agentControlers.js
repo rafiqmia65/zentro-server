@@ -51,7 +51,6 @@ export const createAgent = async (req, res) => {
 };
 
 // get All Agants
-
 export const getAllAgent = async (req, res) => {
   try {
     const agents = await agentModel.find().populate("userId");
@@ -60,6 +59,29 @@ export const getAllAgent = async (req, res) => {
       success: true,
       count: agents.length,
       data: agents,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+// get single agent by id
+export const getSingleAgent = async (req, res) => {
+  try {
+    const { agentId } = req.params;
+
+    // Find agent by ID and populate user info
+    const agent = await agentModel
+      .findById(agentId)
+      .populate("userId", "name email role");
+
+    if (!agent) {
+      return res.status(404).json({ message: "Agent not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: agent,
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
