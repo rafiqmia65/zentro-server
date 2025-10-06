@@ -9,19 +9,19 @@ import {
 
 const router = express.Router();
 
-// create  post
+// Create a new property
 router.post("/add-property", createProperty);
 
-// get all porperty
+// Get all properties
 router.get("/get-all-property", getAllProperty);
 
-// Get Single Property
+// Get a single property by ID
 router.get("/get-single-property/:propertyId", singleProperty);
 
-// Update property by ID
+// Update a property by ID
 router.patch("/update-property/:propertyId", updateProperty);
 
-// DELETE property by ID
+// Delete a property by ID
 router.delete("/delete-property/:propertyId", deleteProperty);
 
 export default router;
