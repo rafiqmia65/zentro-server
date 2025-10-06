@@ -16,9 +16,9 @@ const BlogSchema = new mongoose.Schema(
       type: String,
       required: [true, "Blog content is required"],
     },
-    thumbnail: {
+    image: {
       type: String,
-      required: [true, "Thumbnail image URL is required"],
+      required: [true, "image URL is required"],
     },
     category: {
       type: String,
