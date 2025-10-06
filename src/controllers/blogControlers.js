@@ -46,10 +46,32 @@ export const getAllBlog = async (req, res) => {
 
 export const getSingleBlog = async (req, res) => {
   try {
+    const { blogId } = req.params;
+
+    if (!blogId) {
+      return res.status(400).json({ message: "Blog ID is required" });
+    }
+
+    // Blog + author info
+    const blog = await Blog.findById(blogId).populate(
+      "authorId",
+      "name email profileImage"
+    );
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Blog fetched successfully",
+      blog,
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
+
 export const deleteBlog = async (req, res) => {
   try {
   } catch (error) {
