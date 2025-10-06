@@ -103,13 +103,13 @@ export const singleProperty = async (req, res) => {
   }
 };
 
-// update Property
 export const updateProperty = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { propertyId } = req.params;
     const updateData = req.body;
-    //  Check if property exists
-    const existingProperty = await PropertyModel.findById(id);
+
+    // Check if property exists
+    const existingProperty = await PropertyModel.findById(propertyId);
 
     if (!existingProperty) {
       return res.status(404).json({
@@ -117,9 +117,10 @@ export const updateProperty = async (req, res) => {
         message: "Property not found",
       });
     }
-    //  Update property with new data
+
+    // Update property with new data
     const updatedProperty = await PropertyModel.findByIdAndUpdate(
-      id,
+      propertyId,
       updateData,
       { new: true, runValidators: true }
     );
@@ -130,7 +131,10 @@ export const updateProperty = async (req, res) => {
       data: updatedProperty,
     });
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 

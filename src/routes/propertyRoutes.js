@@ -18,8 +18,8 @@ router.get("/get-all-property", getAllProperty);
 // Get Single Property
 router.get("/get-single-property/:propertyId", singleProperty);
 
-// update property by id
-router.patch("/update-property/:id", updateProperty);
+// Update property by ID
+router.patch("/update-property/:propertyId", updateProperty);
 
 // DELETE property by ID
 router.delete("/delete-property/:id", deleteProperty);
