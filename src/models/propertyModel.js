@@ -15,13 +15,13 @@ const propertySchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    discount: {
-      type: Number,
-      default: 0,
-    },
-    sellingPrice: {
-      type: Number,
-    },
+    // discount: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // sellingPrice: {
+    //   type: Number,
+    // },
     propertyType: {
       type: String,
       enum: ["apartment", "house", "commercial", "land"],
@@ -53,7 +53,7 @@ const propertySchema = new mongoose.Schema(
       },
       unit: {
         type: String,
-        enum: ["sq ft", "sq m", "acre", "hectare", "marla", "bigha"],
+        // enum: ["sq ft", "sq m", "acre", "hectare", "marla", "bigha"],
         required: true,
       },
     },
@@ -62,22 +62,22 @@ const propertySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    videos: { type: String },
-    view360: {
-      type: String,
-    },
-    documentimage: {
-      type: String,
-    },
+    // videos: { type: String },
+    // view360: {
+    //   type: String,
+    // },
+    // documentimage: {
+    //   type: String,
+    // },
     likes: {
       type: Number,
       default: 0,
     },
     location: {
-      address: { type: String, required: true },
+      // address: { type: String, required: true },
       city: { type: String, required: true },
       state: { type: String, required: true },
-      country: { type: String, required: true },
+      // country: { type: String, required: true },
     },
     status: {
       type: String,
