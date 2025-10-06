@@ -1,32 +1,48 @@
 import mongoose from "mongoose";
 
+// Property Schema
 const propertySchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      required: [true, "Property title is required"],
       trim: true,
     },
     description: {
       type: String,
-      required: true,
+      required: [true, "Property description is required"],
+    },
+    images: {
+      type: String,
+      required: [true, "Property image is required"],
+      trim: true,
     },
     price: {
       type: Number,
-      required: true,
+      required: [true, "Property price is required"],
+      min: 0,
     },
-    // discount: {
-    //   type: Number,
-    //   default: 0,
-    // },
-    // sellingPrice: {
-    //   type: Number,
-    // },
-    propertyType: {
+    // Property features will be displayed as checkboxes
+    // When the agent adds a property, they will select features using checkboxes from the available options
+    propertyCategory: {
       type: String,
-      enum: ["apartment", "house", "commercial", "land"],
-      required: true,
+      enum: [
+        "apartment",
+        "house",
+        "commercial",
+        "land",
+        "villa",
+        "studio",
+        "office",
+        "shop",
+        "residential plot",
+        "industrial",
+      ],
+      required: [true, "Property category is required"],
     },
+    // Property features will be displayed as checkboxes
+    // When the agent adds a property, they will select features using checkboxes from the available options
+
     propertyFeatures: {
       type: [String],
       enum: [
@@ -49,53 +65,30 @@ const propertySchema = new mongoose.Schema(
     propertyArea: {
       value: {
         type: Number,
-        required: true,
+        required: [true, "Property area value is required"],
+        min: 0,
       },
       unit: {
         type: String,
-        // enum: ["sq ft", "sq m", "acre", "hectare", "marla", "bigha"],
-        required: true,
+        default: "sq ft",
       },
     },
-
-    images: {
-      type: String,
-      required: true,
-    },
-    // videos: { type: String },
-    // view360: {
-    //   type: String,
-    // },
-    // documentimage: {
-    //   type: String,
-    // },
     likes: {
       type: Number,
       default: 0,
     },
     location: {
-      // address: { type: String, required: true },
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      // country: { type: String, required: true },
+      city: { type: String, required: [true, "City is required"] },
+      state: { type: String, required: [true, "State is required"] },
     },
     status: {
       type: String,
-      enum: ["processing", "selled", "unselled"],
-      default: "unselled",
+      enum: ["processing", "sold", "available", "for rent"],
+      default: "available",
     },
   },
   { timestamps: true }
 );
 
-// sellingPrice auto-calculate
-propertySchema.pre("save", function (next) {
-  if (this.discount > 0) {
-    this.sellingPrice = this.price - (this.price * this.discount) / 100;
-  } else {
-    this.sellingPrice = this.price;
-  }
-  next();
-});
-
+// Export Property model
 export default mongoose.model("Property", propertySchema);
