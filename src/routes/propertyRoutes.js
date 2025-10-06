@@ -15,8 +15,8 @@ router.post("/add-property", createProperty);
 // get all porperty
 router.get("/get-all-property", getAllProperty);
 
-// sinle get property
-router.get("/get-single-property/:id", singleProperty);
+// Get Single Property
+router.get("/get-single-property/:propertyId", singleProperty);
 
 // update property by id
 router.patch("/update-property/:id", updateProperty);

@@ -77,13 +77,13 @@ export const getAllProperty = async (req, res) => {
 //  Get Single Property
 export const singleProperty = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { propertyId } = req.params;
 
     // Find property by ID
-    const singleProperty = await PropertyModel.findById(id);
+    const property = await PropertyModel.findById(propertyId);
 
-    //  If property not found
-    if (!singleProperty) {
+    // If property not found
+    if (!property) {
       return res.status(404).json({
         success: false,
         message: "Property not found",
@@ -93,7 +93,7 @@ export const singleProperty = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Single property retrieved successfully",
-      data: singleProperty,
+      data: property,
     });
   } catch (error) {
     return res.status(500).json({
