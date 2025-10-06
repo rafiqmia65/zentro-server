@@ -28,6 +28,21 @@ export const createBlog = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+export const getAllBlog = async (req, res) => {
+  try {
+    const blogs = await Blog.find()
+      .populate("authorId")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: blogs.length,
+      blogs,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 export const getSingleBlog = async (req, res) => {
   try {
