@@ -74,6 +74,10 @@ export const getSingleBlog = async (req, res) => {
 
 export const deleteBlog = async (req, res) => {
   try {
+    const {blogId}=req.params
+    if(!blogId){
+        return res.status(400).json({ message: "Blog ID is required" });
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
