@@ -14,7 +14,6 @@ app.use(express.json());
 // Routes
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/property", propertyRoutes);
-app.use("/api/v1/blog", blogRoutes);
 app.use("/api/v1/agent", AgentRoutes);
 
 app.get("/", (req, res) => {

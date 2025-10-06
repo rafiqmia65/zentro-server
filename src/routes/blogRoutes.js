@@ -7,6 +7,8 @@ import {
   updateBlog,
 } from "../controllers/blogControlers.js";
 
+//app.use("/api/v1/blog", blogRoutes);
+
 const router = express.Router();
 
 // Route to create a new blog
