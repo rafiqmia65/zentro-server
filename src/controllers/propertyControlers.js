@@ -1,11 +1,11 @@
 import PropertyModel from "../models/propertyModel.js";
 
-//  Create Property
+// Create a new property
 export const createProperty = async (req, res) => {
   try {
     const propertyData = req.body;
 
-    // 🔍 Check if property already exists in the same city
+    //Check if a property with the same title already exists in the same city
     const existingProperty = await PropertyModel.findOne({
       title: propertyData.title,
       "location.city": propertyData.location.city,
@@ -14,14 +14,24 @@ export const createProperty = async (req, res) => {
     if (existingProperty) {
       return res.status(400).json({
         success: false,
-        message: "Property already exists in this city",
+        message: "Property with this title already exists in this city",
       });
     }
 
-    //  Create a new property instance
-    const newProperty = new PropertyModel(propertyData);
+    //Create a new property instance
+    const newProperty = new PropertyModel({
+      title: propertyData.title,
+      description: propertyData.description,
+      images: propertyData.images,
+      price: propertyData.price,
+      propertyCategory: propertyData.propertyCategory || [], // checkbox selected features,
+      propertyFeatures: propertyData.propertyFeatures || [], // checkbox selected features
+      propertyArea: propertyData.propertyArea,
+      location: propertyData.location,
+      status: propertyData.status || "available",
+    });
 
-    //  Save property to MongoDB
+    //Save the property to MongoDB
     await newProperty.save();
 
     return res.status(201).json({
