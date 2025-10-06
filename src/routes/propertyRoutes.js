@@ -22,6 +22,6 @@ router.get("/get-single-property/:propertyId", singleProperty);
 router.patch("/update-property/:propertyId", updateProperty);
 
 // DELETE property by ID
-router.delete("/delete-property/:id", deleteProperty);
+router.delete("/delete-property/:propertyId", deleteProperty);
 
 export default router;

@@ -141,10 +141,9 @@ export const updateProperty = async (req, res) => {
 // delete a property
 export const deleteProperty = async (req, res) => {
   try {
-    const { id } = req.params;
-
+    const { propertyId } = req.params;
     // Check if property exists
-    const existingProperty = await PropertyModel.findById(id);
+    const existingProperty = await PropertyModel.findById(propertyId);
     if (!existingProperty) {
       return res.status(404).json({
         success: false,
@@ -153,7 +152,7 @@ export const deleteProperty = async (req, res) => {
     }
 
     // Delete the property
-    await PropertyModel.findByIdAndDelete(id);
+    await PropertyModel.findByIdAndDelete(propertyId);
 
     return res.status(200).json({
       success: true,
