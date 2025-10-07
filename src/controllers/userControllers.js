@@ -1,5 +1,6 @@
 import userModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+import agentModel from "../models/agentModel.js";
 
 /* --------------------------------------------------------------------------
  Create a New User (POST)
@@ -87,13 +88,19 @@ export const getUserById = async (req, res) => {
       });
     }
 
+    // Find agent info by userId (if exists)
+    const agent = await agentModel.findOne({ userId: id });
+
     res.status(200).json({
       success: true,
       message: "User fetched successfully",
-      data: user,
+      data: {
+        user,
+        agent: agent || null,
+      },
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error in getUserById:", error);
     res.status(500).json({
       success: false,
       message: "Server error",
