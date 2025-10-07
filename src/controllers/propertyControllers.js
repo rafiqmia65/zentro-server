@@ -1,11 +1,11 @@
 import PropertyModel from "../models/propertyModel.js";
 
-//  Create Property
+// Create a new property
 export const createProperty = async (req, res) => {
   try {
     const propertyData = req.body;
 
-    // 🔍 Check if property already exists in the same city
+    // Check if a property with the same title already exists in the same city
     const existingProperty = await PropertyModel.findOne({
       title: propertyData.title,
       "location.city": propertyData.location.city,
@@ -14,14 +14,24 @@ export const createProperty = async (req, res) => {
     if (existingProperty) {
       return res.status(400).json({
         success: false,
-        message: "Property already exists in this city",
+        message: "Property with this title already exists in this city",
       });
     }
 
-    //  Create a new property instance
-    const newProperty = new PropertyModel(propertyData);
+    // Create a new property instance
+    const newProperty = new PropertyModel({
+      title: propertyData.title,
+      description: propertyData.description,
+      images: propertyData.images,
+      price: propertyData.price,
+      propertyCategory: propertyData.propertyCategory || [], //chackbox sellection
+      propertyFeatures: propertyData.propertyFeatures || [], //chackbox sellection
+      propertyArea: propertyData.propertyArea,
+      location: propertyData.location,
+      status: propertyData.status || "available",
+    });
 
-    //  Save property to MongoDB
+    // Save the property to MongoDB
     await newProperty.save();
 
     return res.status(201).json({
@@ -37,13 +47,13 @@ export const createProperty = async (req, res) => {
   }
 };
 
-//  Get All Properties
+// Get all properties
 export const getAllProperty = async (req, res) => {
   try {
-    //  Get all properties sorted by latest created
+    // Retrieve all properties sorted by creation date (latest first)
     const allProperty = await PropertyModel.find().sort({ createdAt: -1 });
 
-    // If no properties found
+    // Return 404 if no properties found
     if (!allProperty || allProperty.length === 0) {
       return res.status(404).json({
         success: false,
@@ -64,16 +74,16 @@ export const getAllProperty = async (req, res) => {
   }
 };
 
-//  Get Single Property
+// Get a single property by ID
 export const singleProperty = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { propertyId } = req.params;
 
     // Find property by ID
-    const singleProperty = await PropertyModel.findById(id);
+    const property = await PropertyModel.findById(propertyId);
 
-    //  If property not found
-    if (!singleProperty) {
+    // Return 404 if property not found
+    if (!property) {
       return res.status(404).json({
         success: false,
         message: "Property not found",
@@ -83,7 +93,7 @@ export const singleProperty = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Single property retrieved successfully",
-      data: singleProperty,
+      data: property,
     });
   } catch (error) {
     return res.status(500).json({
@@ -93,13 +103,14 @@ export const singleProperty = async (req, res) => {
   }
 };
 
-// update Property
+// Update a property by ID
 export const updateProperty = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { propertyId } = req.params;
     const updateData = req.body;
-    //  Check if property exists
-    const existingProperty = await PropertyModel.findById(id);
+
+    // Check if the property exists before updating
+    const existingProperty = await PropertyModel.findById(propertyId);
 
     if (!existingProperty) {
       return res.status(404).json({
@@ -107,9 +118,10 @@ export const updateProperty = async (req, res) => {
         message: "Property not found",
       });
     }
-    //  Update property with new data
+
+    // Update the property with new data and return the updated document
     const updatedProperty = await PropertyModel.findByIdAndUpdate(
-      id,
+      propertyId,
       updateData,
       { new: true, runValidators: true }
     );
@@ -120,17 +132,20 @@ export const updateProperty = async (req, res) => {
       data: updatedProperty,
     });
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
-// delete a property
+// Delete a property by ID
 export const deleteProperty = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { propertyId } = req.params;
 
-    // Check if property exists
-    const existingProperty = await PropertyModel.findById(id);
+    // Check if the property exists before deleting
+    const existingProperty = await PropertyModel.findById(propertyId);
     if (!existingProperty) {
       return res.status(404).json({
         success: false,
@@ -138,8 +153,8 @@ export const deleteProperty = async (req, res) => {
       });
     }
 
-    // Delete the property
-    await PropertyModel.findByIdAndDelete(id);
+    // Delete the property from MongoDB
+    await PropertyModel.findByIdAndDelete(propertyId);
 
     return res.status(200).json({
       success: true,

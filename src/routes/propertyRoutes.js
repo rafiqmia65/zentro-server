@@ -5,23 +5,23 @@ import {
   getAllProperty,
   singleProperty,
   updateProperty,
-} from "../controllers/propertyControlers.js";
+} from "../controllers/propertyControllers.js";
 
 const router = express.Router();
 
-// create  post
+// Create a new property
 router.post("/add-property", createProperty);
 
-// get all porperty
+// Get all properties
 router.get("/get-all-property", getAllProperty);
 
-// sinle get property
-router.get("/get-single-property/:id", singleProperty);
+// Get a single property by ID
+router.get("/get-single-property/:propertyId", singleProperty);
 
-// update property by id
-router.patch("/update-property/:id", updateProperty);
+// Update a property by ID
+router.patch("/update-property/:propertyId", updateProperty);
 
-// DELETE property by ID
-router.delete("/delete-property/:id", deleteProperty);
+// Delete a property by ID
+router.delete("/delete-property/:propertyId", deleteProperty);
 
 export default router;
