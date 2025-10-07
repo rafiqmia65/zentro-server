@@ -3,9 +3,14 @@ import mongoose from "mongoose";
 const agentSchema = new mongoose.Schema(
   {
     userId: {
-      type: String, 
+      type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
+    name: { type: String, required: true },
     bio: { type: String, trim: true },
     licenseNo: {
       type: String,
@@ -20,10 +25,9 @@ const agentSchema = new mongoose.Schema(
     },
     totalSales: { type: Number, default: 0 },
     totalRentals: { type: Number, default: 0 },
-    contactInfo: {
-      officeAddress: { type: String },
-      name: { type: String, required: true },
-      email: { type: String, required: true },
+    officeAddress: {
+      type: String,
+      required: true,
     },
     status: {
       type: String,
