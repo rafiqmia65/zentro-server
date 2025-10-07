@@ -15,7 +15,7 @@ const router = express.Router();
 // Frontend sends userId as param
 // Role will be "pending" until admin approves
 // -----------------------------
-router.post("/agents/:userId", createAgent);
+router.post("/", createAgent);
 
 // -----------------------------
 // Get all agents

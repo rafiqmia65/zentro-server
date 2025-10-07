@@ -8,7 +8,13 @@ import blogRoutes from "./routes/blogRoutes.js";
 const app = express();
 
 // Middleware
-app.use(cors());
+// Allow requests from your frontend
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://zentro-frontend.vercel.app"], // add your frontend URLs
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
