@@ -1,32 +1,34 @@
-import agentModel from "../models/agentModel.js";
-import userModel from "../models/userModel.js";
+import Agent from "../models/agentModel.js";
+import User from "../models/userModel.js";
 
-/* --------------------------------------------------------------------------
- Create Agent (Apply)
--------------------------------------------------------------------------- */
 export const createAgent = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const { bio, licenseNo, contactInfo } = req.body;
+    const { userId, email, name, bio, licenseNo, officeAddress } = req.body;
 
-    if (!userId) return res.status(401).json({ message: "Unauthorized" });
-    if (!licenseNo)
-      return res.status(400).json({ message: "License No required" });
+    console.log(req.body);
 
-    const existingAgent = await agentModel.findOne({ userId });
-    if (existingAgent) {
+    if (!userId || !email || !name) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const exists = await Agent.findOne({ userId });
+    if (exists) {
       return res.status(400).json({ message: "You already applied as agent" });
     }
 
-    const agent = await agentModel.create({
+    const agent = await Agent.create({
       userId,
+      email,
+      name,
       bio,
       licenseNo,
-      contactInfo,
+      officeAddress,
     });
 
-    // role -> pending
-    await userModel.findByIdAndUpdate(userId, { role: "pending" });
+    await User.findByIdAndUpdate(userId, { role: "pending" });
 
     return res.status(201).json({
       success: true,
