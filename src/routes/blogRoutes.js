@@ -5,9 +5,7 @@ import {
   getAllBlog,
   getSingleBlog,
   updateBlog,
-} from "../controllers/blogControlers.js";
-
-//app.use("/api/v1/blog", blogRoutes);
+} from "../controllers/blogControllers.js";
 
 const router = express.Router();
 

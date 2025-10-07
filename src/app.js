@@ -15,6 +15,7 @@ app.use(express.json());
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/property", propertyRoutes);
 app.use("/api/v1/agent", AgentRoutes);
+app.use("/api/v1/blog", blogRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Zentro Place Server is Cooking!!" });
