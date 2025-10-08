@@ -3,8 +3,9 @@ import Blog from "../models/blogModel.js";
 // Create a new blog
 export const createBlog = async (req, res) => {
   try {
+    // Extract authorId from params and blog details from body
     const { authorId } = req.params;
-    const { title, description, content, image, category } = req.body;
+    const { title, description, content, image, category, area, bedroom, bathroom } = req.body;
 
     // Check if authorId is provided
     if (!authorId) {
@@ -18,10 +19,14 @@ export const createBlog = async (req, res) => {
       content,
       image,
       category,
+      area,
+      // Use default 1 if bedroom or bathroom not provided
+      bedroom: bedroom ?? 1,
+      bathroom: bathroom ?? 1,
       authorId,
     });
 
-    // Save the blog to the database
+    // Save the blog to database
     await newBlog.save();
 
     // Send success response
@@ -31,6 +36,7 @@ export const createBlog = async (req, res) => {
       blog: newBlog,
     });
   } catch (error) {
+    // Send error response
     res.status(500).json({ message: error.message });
   }
 };
@@ -38,10 +44,10 @@ export const createBlog = async (req, res) => {
 // Get all blogs
 export const getAllBlog = async (req, res) => {
   try {
-    // Fetch all blogs and populate author info
+    // Fetch all blogs, populate author info, sort newest first
     const blogs = await Blog.find()
-      .populate("authorId")
-      .sort({ createdAt: -1 }); // Newest blogs first
+      .populate("authorId", "name email profileImage")
+      .sort({ createdAt: -1 });
 
     // Send response
     res.status(200).json({
@@ -64,7 +70,7 @@ export const getSingleBlog = async (req, res) => {
       return res.status(400).json({ message: "Blog ID is required" });
     }
 
-    // Find the blog and populate author info
+    // Find the blog by ID and populate author info
     const blog = await Blog.findById(blogId).populate(
       "authorId",
       "name email profileImage"
@@ -118,17 +124,26 @@ export const deleteBlog = async (req, res) => {
 export const updateBlog = async (req, res) => {
   try {
     const { blogId } = req.params;
-    const { title, description, content, image, category } = req.body;
+    const { title, description, content, image, category, area, bedroom, bathroom } = req.body;
 
     // Check if blogId is provided
     if (!blogId) {
       return res.status(400).json({ message: "Blog ID is required" });
     }
 
-    // Find the blog and update it
+    // Find the blog by ID and update
     const updatedBlog = await Blog.findByIdAndUpdate(
       blogId,
-      { title, description, content, image, category },
+      {
+        title,
+        description,
+        content,
+        image,
+        category,
+        area,
+        bedroom,
+        bathroom,
+      },
       { new: true, runValidators: true }
     ).populate("authorId", "name email profileImage");
 
@@ -144,6 +159,7 @@ export const updateBlog = async (req, res) => {
       blog: updatedBlog,
     });
   } catch (error) {
+    // Send error response
     res.status(500).json({ message: error.message });
   }
 };
