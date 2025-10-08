@@ -155,6 +155,37 @@ export const updateUser = async (req, res) => {
 };
 
 /* --------------------------------------------------------------------------
+ Delete all Users (DELETE)
+-------------------------------------------------------------------------- */
+export const deleteAllUser = async (req, res) => {
+  try {
+    const response = await userModel.deleteMany();
+
+    if (!response) {
+      return res.status(404).json({
+        success: false,
+        message: "Could not delete all users!!!",
+        data: null,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "All Users deleted successfully",
+      data: response,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      data: { error: error.message },
+    });
+  }
+};
+
+
+/* --------------------------------------------------------------------------
  Delete a User (DELETE)
 -------------------------------------------------------------------------- */
 export const deleteUser = async (req, res) => {

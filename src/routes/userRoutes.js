@@ -23,6 +23,9 @@ router.get("/", getUsers);
 // SignIn
 router.post("/signin", loginUser);
 
+// Delete all users
+router.delete("/delete-all", deleteUser);
+
 // Get single user by ID
 router.get("/:id", getUserById);
 
@@ -30,6 +33,6 @@ router.get("/:id", getUserById);
 router.patch("/:id", updateUser);
 
 // Delete a user by ID
-router.delete("/:id", deleteUser);
+router.delete("/:id", deleteUser)
 
 export default router;
