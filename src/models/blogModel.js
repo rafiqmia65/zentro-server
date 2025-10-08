@@ -18,12 +18,28 @@ const BlogSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      required: [true, "image URL is required"],
+      required: [true, "Image URL is required"],
     },
     category: {
       type: String,
       required: [true, "Category is required"],
     },
+    area: {
+      type: String,
+      required: [true, "Area is required"],
+    },
+    bedroom: {
+      type: Number,
+      default: 1,
+      min: [0, "Bedroom count cannot be negative"],
+    },
+
+    bathroom: {
+      type: Number,
+      default: 1,
+      min: [0, "Bathroom count cannot be negative"],
+    },
+
     authorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -35,5 +51,5 @@ const BlogSchema = new mongoose.Schema(
   }
 );
 
-const Blog = mongoose.model("Blog", BlogSchema);
+const Blog = mongoose.models.Blog || mongoose.model("Blog", BlogSchema);
 export default Blog;
