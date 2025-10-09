@@ -33,21 +33,6 @@ const propertySchema = new mongoose.Schema(
 
     propertyFeatures: {
       type: [String],
-      enum: [
-        "parking",
-        "gym",
-        "swimming pool",
-        "garden",
-        "home theater",
-        "balcony",
-        "terrace",
-        "fireplace",
-        "air conditioning",
-        "solar panels",
-        "storage room",
-        "elevator",
-        "security system",
-      ],
       default: [],
     },
     propertyArea: {
@@ -71,7 +56,6 @@ const propertySchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["processing", "sold", "available", "for rent"],
       default: "available",
     },
   },
