@@ -2,6 +2,9 @@ import userModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import agentModel from "../models/agentModel.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+
 
 // secret 
 const SECRET = process.env.JWT_SECRET
@@ -23,10 +26,6 @@ export const createUser = async (req, res) => {
       });
     }
 
-    // jwt 
-    const token = jwt.sign({ email: user.email }, SECRET, { expiresIn: "1h" });
-
-
     // Create new user (password hashing handled by pre-save middleware)
     const newUser = new userModel({
       name,
@@ -36,9 +35,7 @@ export const createUser = async (req, res) => {
       photoUrl,
       phone,
       address,
-      token
     });
-
 
     await newUser.save(); // Trigger pre("save") to hash password and set timestamps
 
@@ -311,7 +308,11 @@ export const loginUser = async (req, res) => {
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.password;
 
-    // 5. Send response with user data (without password)
+    // 5. JWT
+    const token = jwt.sign({ email: user.email }, SECRET, { expiresIn: "1h" });
+    userWithoutPassword.token = token
+
+    // 6. Send response with user data (without password)
     res.status(200).json({
       success: true,
       message: "Login successful",
