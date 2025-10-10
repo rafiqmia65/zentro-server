@@ -7,7 +7,8 @@ dotenv.config();
 
 
 // secret 
-const SECRET = process.env.JWT_SECRET
+// const SECRET = process.env.JWT_SECRET
+const SECRET = "TestSecretForNow"
 
 /* --------------------------------------------------------------------------
  Create a New User (POST)
