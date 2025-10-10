@@ -20,6 +20,10 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
+    token: {
+      type: String,
+      required: [true, "Name is required"],
+    },
     photoUrl: {
       type: String,
       default: "",
