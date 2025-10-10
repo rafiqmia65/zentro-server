@@ -7,7 +7,8 @@ dotenv.config();
 
 
 // secret 
-const SECRET = process.env.JWT_SECRET || "TestSecretForNow"
+// const SECRET = process.env.JWT_SECRET 
+const SECRET = "TestSecretForNow"
 
 /* --------------------------------------------------------------------------
  Create a New User (POST)
@@ -62,7 +63,7 @@ export const createUser = async (req, res) => {
 /* --------------------------------------------------------------------------
  Get All Users (GET)
 -------------------------------------------------------------------------- */
-export const getUsers = async (req, verifyToken, res) => {
+export const getUsers = async (req, res) => {
   try {
     // Fetch all users but exclude password for security
     const users = await userModel.find().select("-password");
