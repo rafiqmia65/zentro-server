@@ -49,6 +49,10 @@ const userSchema = new Schema(
       enum: ["admin", "customer", "agent", "pending"],
       default: "customer",
     },
+    banned: {
+      type: Boolean,
+      default: false,
+    },
     accountCreatedAt: {
       type: Date,
       default: Date.now,
