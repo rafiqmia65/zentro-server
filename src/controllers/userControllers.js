@@ -1,6 +1,10 @@
 import userModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import agentModel from "../models/agentModel.js";
+import jwt from "jsonwebtoken";
+
+// secret 
+const SECRET = process.env.JWT_SECRET
 
 /* --------------------------------------------------------------------------
  Create a New User (POST)
@@ -19,6 +23,10 @@ export const createUser = async (req, res) => {
       });
     }
 
+    // jwt 
+    const token = jwt.sign({ email: user.email }, SECRET, { expiresIn: "1h" });
+
+
     // Create new user (password hashing handled by pre-save middleware)
     const newUser = new userModel({
       name,
@@ -28,7 +36,9 @@ export const createUser = async (req, res) => {
       photoUrl,
       phone,
       address,
+      token
     });
+
 
     await newUser.save(); // Trigger pre("save") to hash password and set timestamps
 
@@ -46,6 +56,11 @@ export const createUser = async (req, res) => {
     });
   }
 };
+
+
+
+
+
 
 /* --------------------------------------------------------------------------
  Get All Users (GET)
@@ -69,6 +84,11 @@ export const getUsers = async (req, res) => {
     });
   }
 };
+
+
+
+
+
 
 /* --------------------------------------------------------------------------
  Get a Single User by ID (GET)
@@ -108,6 +128,11 @@ export const getUserById = async (req, res) => {
     });
   }
 };
+
+
+
+
+
 
 /* --------------------------------------------------------------------------
  Update an Existing User (PATCH)
@@ -154,6 +179,11 @@ export const updateUser = async (req, res) => {
   }
 };
 
+
+
+
+
+
 /* --------------------------------------------------------------------------
  Delete all Users (DELETE)
 -------------------------------------------------------------------------- */
@@ -183,6 +213,13 @@ export const deleteAllUser = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+
+
 
 
 /* --------------------------------------------------------------------------
@@ -217,6 +254,12 @@ export const deleteUser = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+
 
 /* --------------------------------------------------------------------------
  User Login (POST)
