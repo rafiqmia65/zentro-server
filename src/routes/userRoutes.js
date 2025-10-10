@@ -32,9 +32,9 @@ router.delete("/delete-all", deleteAllUser);
 router.get("/:id", getUserById);
 
 // Update a user by ID
-router.patch("/:id", updateUser);
+router.patch("/:id",verifyAdmin, updateUser);
 
 // Delete a user by ID
-router.delete("/:id", deleteUser)
+router.delete("/:id",verifyAdmin, deleteUser)
 
 export default router;
