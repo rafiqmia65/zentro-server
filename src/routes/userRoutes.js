@@ -8,7 +8,7 @@ import {
   loginUser,
   deleteAllUser,
 } from "../controllers/userControllers.js";
-import { verifyToken } from "../middlewares/authMiddleware.js";
+import { verifyAdmin } from "../middlewares/adminMiddleware.js";
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ const router = express.Router();
 router.post("/", createUser);
 
 // Get all users
-router.get("/", verifyToken, getUsers);
+router.get("/", verifyAdmin, getUsers);
 
 // SignIn
 router.post("/signin", loginUser);
