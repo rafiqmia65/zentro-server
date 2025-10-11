@@ -28,6 +28,7 @@ export const createProperty = async (req, res) => {
       propertyFeatures: propertyData.propertyFeatures || [], //chackbox sellection
       propertyArea: propertyData.propertyArea,
       location: propertyData.location,
+      addedBy: propertyData.addedBy,
       status: propertyData.status || "available",
     });
 
