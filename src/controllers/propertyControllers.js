@@ -28,6 +28,7 @@ export const createProperty = async (req, res) => {
       propertyFeatures: propertyData.propertyFeatures || [], //chackbox sellection
       propertyArea: propertyData.propertyArea,
       location: propertyData.location,
+      addedBy: propertyData.addedBy,
       status: propertyData.status || "available",
     });
 
@@ -159,6 +160,42 @@ export const deleteProperty = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Property deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+
+
+
+// get dashboard property 
+export const getDashboardProperty = async (req, res) => {
+  const role = req?.user?.role
+  const email = req?.user?.email
+  const query = {}
+
+  if (role === 'agent') query.addedBy = email
+  try {
+    // Retrieve all properties sorted by creation date (latest first)
+    const allProperty = await PropertyModel.find(query).sort({ createdAt: -1 });
+
+    // Return 404 if no properties found
+    if (!allProperty || allProperty.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No properties found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Properties retrieved successfully",
+      data: allProperty,
     });
   } catch (error) {
     return res.status(500).json({
