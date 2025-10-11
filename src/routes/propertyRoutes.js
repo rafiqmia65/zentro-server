@@ -8,11 +8,12 @@ import {
   updateProperty,
 } from "../controllers/propertyControllers.js";
 import { verifyToken } from "../middlewares/authMiddleware.js";
+import { verifyAgent } from "../middlewares/agentMiddleware.js";
 
 const router = express.Router();
 
 // Create a new property
-router.post("/add-property", createProperty);
+router.post("/add-property", verifyAgent, createProperty);
 
 // Get all properties
 router.get("/get-all-property", getAllProperty);
