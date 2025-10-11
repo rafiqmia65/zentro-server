@@ -1,4 +1,4 @@
-import Agent from "../models/agentModel.js";
+import agentModel from "../models/agentModel.js";
 import User from "../models/userModel.js";
 
 export const createAgent = async (req, res) => {
@@ -14,12 +14,12 @@ export const createAgent = async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const exists = await Agent.findOne({ userId });
+    const exists = await agentModel.findOne({ userId });
     if (exists) {
       return res.status(400).json({ message: "You already applied as agent" });
     }
 
-    const agent = await Agent.create({
+    const agent = await agentModel.create({
       userId,
       email,
       name,
