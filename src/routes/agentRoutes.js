@@ -1,28 +1,44 @@
 import express from "express";
 import {
+  changeAgentStatus,
   createAgent,
   deleteAgent,
-  getAllAgent,
+  getAllAgents,
   getSingleAgent,
   updateAgent,
-} from "../controllers/agentControlers.js";
+} from "../controllers/agentControllers.js";
 
 const router = express.Router();
 
+// -----------------------------
+// Create a new agent (User applies as agent)
+// -----------------------------
+router.post("/", createAgent);
 
-// crate a agent
-router.post("/:userId/add-agent", createAgent);
+// -----------------------------
+// Get all agents
+// -----------------------------
+router.get("/", getAllAgents);
 
-// get all agent
-router.get("/get-all-agent", getAllAgent);
+// -----------------------------
+// Get a single agent by agentId
+// -----------------------------
+router.get("/:agentId", getSingleAgent);
 
-// get single agent
-router.get("/get-single-agent/:agentId", getSingleAgent);
+// -----------------------------
+// Update agent details
+// Only the agent/admin should do this
+// -----------------------------
+router.patch("/:agentId", updateAgent);
 
-// Update agent
-router.put("/update-agent/:agentId", updateAgent);
+// -----------------------------
+// Delete an agent
+// -----------------------------
+router.delete("/:agentId", deleteAgent);
 
-// delete agent
-router.delete("/delete-agent/:agentId", deleteAgent);
+// -----------------------------
+// Change agent status (Admin Only)
+// -----------------------------
+router.patch("/status/:agentId", changeAgentStatus);
 
 export default router;

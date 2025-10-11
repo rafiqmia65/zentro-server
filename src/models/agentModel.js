@@ -1,18 +1,17 @@
 import mongoose from "mongoose";
 
-const { Schema, model, models } = mongoose;
-
-const agentSchema = new Schema(
+const agentSchema = new mongoose.Schema(
   {
     userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
       required: true,
     },
-    bio: {
+    email: {
       type: String,
-      trim: true,
+      required: true,
     },
+    name: { type: String, required: true },
+    bio: { type: String, trim: true },
     licenseNo: {
       type: String,
       required: true,
@@ -24,23 +23,20 @@ const agentSchema = new Schema(
       min: 0,
       max: 5,
     },
-    totalSales: {
-      type: Number,
-      default: 0,
+    totalSales: { type: Number, default: 0 },
+    totalRentals: { type: Number, default: 0 },
+    officeAddress: {
+      type: String,
+      required: true,
     },
-    totalRentals: {
-      type: Number,
-      default: 0,
-    },
-    contactInfo: {
-      officeAddress: {
-        type: String,
-        required: true,
-      },
+    status: {
+      type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: "pending",
     },
   },
-  { timestamps: true, versionKey: false }
+  { timestamps: true }
 );
 
-const agentModel = models.Agent || model("Agent", agentSchema);
-export default agentModel;
+const Agent = mongoose.model("Agent", agentSchema, "agents");
+export default Agent;

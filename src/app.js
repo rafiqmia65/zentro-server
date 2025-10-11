@@ -7,14 +7,30 @@ import blogRoutes from "./routes/blogRoutes.js";
 
 const app = express();
 
+// cors 
+app.use(cors({
+  origin: [
+    "http://localhost:3000",          
+    "https://zentro-place.vercel.app"
+  ],
+  credentials: true,          
+}));
+
 // Middleware
-app.use(cors());
+// Allow requests from your frontend
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://zentro-frontend.vercel.app"], // add your frontend URLs
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/property", propertyRoutes);
 app.use("/api/v1/agent", AgentRoutes);
+app.use("/api/v1/blog", blogRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Zentro Place Server is Cooking!!" });

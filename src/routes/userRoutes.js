@@ -6,7 +6,9 @@ import {
   updateUser,
   deleteUser,
   loginUser,
-} from "../controllers/userControlers.js";
+  deleteAllUser,
+} from "../controllers/userControllers.js";
+import { verifyAdmin } from "../middlewares/adminMiddleware.js";
 
 const router = express.Router();
 
@@ -18,18 +20,21 @@ const router = express.Router();
 router.post("/", createUser);
 
 // Get all users
-router.get("/", getUsers);
+router.get("/", verifyAdmin, getUsers);
 
 // SignIn
 router.post("/signin", loginUser);
+
+// Delete all users
+router.delete("/delete-all", deleteAllUser);
 
 // Get single user by ID
 router.get("/:id", getUserById);
 
 // Update a user by ID
-router.patch("/:id", updateUser);
+router.patch("/:id",verifyAdmin, updateUser);
 
 // Delete a user by ID
-router.delete("/:id", deleteUser);
+router.delete("/:id",verifyAdmin, deleteUser)
 
 export default router;

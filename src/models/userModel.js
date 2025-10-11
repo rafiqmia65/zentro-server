@@ -46,8 +46,12 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "customer", "agent"],
+      enum: ["admin", "customer", "agent", "pending"],
       default: "customer",
+    },
+    banned: {
+      type: Boolean,
+      default: false,
     },
     accountCreatedAt: {
       type: Date,

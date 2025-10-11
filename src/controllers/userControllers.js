@@ -1,5 +1,14 @@
 import userModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+import agentModel from "../models/agentModel.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+
+
+// secret 
+// const SECRET = process.env.JWT_SECRET 
+const SECRET = "TestSecretForNow"
 
 /* --------------------------------------------------------------------------
  Create a New User (POST)
@@ -46,6 +55,11 @@ export const createUser = async (req, res) => {
   }
 };
 
+
+
+
+
+
 /* --------------------------------------------------------------------------
  Get All Users (GET)
 -------------------------------------------------------------------------- */
@@ -69,6 +83,11 @@ export const getUsers = async (req, res) => {
   }
 };
 
+
+
+
+
+
 /* --------------------------------------------------------------------------
  Get a Single User by ID (GET)
 -------------------------------------------------------------------------- */
@@ -87,13 +106,19 @@ export const getUserById = async (req, res) => {
       });
     }
 
+    // Find agent info by userId (if exists)
+    const agent = await agentModel.findOne({ userId: id });
+
     res.status(200).json({
       success: true,
       message: "User fetched successfully",
-      data: user,
+      data: {
+        user,
+        agent: agent || null,
+      },
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error in getUserById:", error);
     res.status(500).json({
       success: false,
       message: "Server error",
@@ -101,6 +126,11 @@ export const getUserById = async (req, res) => {
     });
   }
 };
+
+
+
+
+
 
 /* --------------------------------------------------------------------------
  Update an Existing User (PATCH)
@@ -147,6 +177,49 @@ export const updateUser = async (req, res) => {
   }
 };
 
+
+
+
+
+
+/* --------------------------------------------------------------------------
+ Delete all Users (DELETE)
+-------------------------------------------------------------------------- */
+export const deleteAllUser = async (req, res) => {
+  try {
+    const response = await userModel.deleteMany();
+
+    if (!response) {
+      return res.status(404).json({
+        success: false,
+        message: "Could not delete all users!!!",
+        data: null,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "All Users deleted successfully",
+      data: response,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      data: { error: error.message },
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
 /* --------------------------------------------------------------------------
  Delete a User (DELETE)
 -------------------------------------------------------------------------- */
@@ -179,6 +252,12 @@ export const deleteUser = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+
 
 /* --------------------------------------------------------------------------
  User Login (POST)
@@ -230,7 +309,11 @@ export const loginUser = async (req, res) => {
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.password;
 
-    // 5. Send response with user data (without password)
+    // 5. JWT
+    const token = jwt.sign({ email: user.email }, SECRET, { expiresIn: "1h" });
+    userWithoutPassword.token = token
+
+    // 6. Send response with user data (without password)
     res.status(200).json({
       success: true,
       message: "Login successful",

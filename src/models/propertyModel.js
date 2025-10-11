@@ -26,18 +26,6 @@ const propertySchema = new mongoose.Schema(
     // When the agent adds a property, they will select features using checkboxes from the available options
     propertyCategory: {
       type: String,
-      enum: [
-        "apartment",
-        "house",
-        "commercial",
-        "land",
-        "villa",
-        "studio",
-        "office",
-        "shop",
-        "residential plot",
-        "industrial",
-      ],
       required: [true, "Property category is required"],
     },
     // Property features will be displayed as checkboxes
@@ -45,21 +33,6 @@ const propertySchema = new mongoose.Schema(
 
     propertyFeatures: {
       type: [String],
-      enum: [
-        "parking",
-        "gym",
-        "swimming pool",
-        "garden",
-        "home theater",
-        "balcony",
-        "terrace",
-        "fireplace",
-        "air conditioning",
-        "solar panels",
-        "storage room",
-        "elevator",
-        "security system",
-      ],
       default: [],
     },
     propertyArea: {
@@ -83,7 +56,6 @@ const propertySchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["processing", "sold", "available", "for rent"],
       default: "available",
     },
   },
