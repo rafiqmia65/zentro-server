@@ -1,4 +1,6 @@
+import Agent from "../models/agentModel.js";
 import PropertyModel from "../models/propertyModel.js";
+import userModel from "../models/userModel.js";
 
 // Create a new property
 export const createProperty = async (req, res) => {
@@ -83,7 +85,6 @@ export const singleProperty = async (req, res) => {
     // Find property by ID
     const property = await PropertyModel.findById(propertyId);
 
-    // Return 404 if property not found
     if (!property) {
       return res.status(404).json({
         success: false,
@@ -91,10 +92,27 @@ export const singleProperty = async (req, res) => {
       });
     }
 
+    // Get email from property.addedBy
+    const addedByEmail = property.addedBy;
+
+    // Find user info by email
+    const userInfo = await userModel
+      .findOne({ email: addedByEmail })
+      .select("-password -__v -createdAt -updatedAt");
+
+    // Find agent info by email
+    const agentInfo = await Agent.findOne({ email: addedByEmail }).select(
+      "-password -__v -createdAt -updatedAt"
+    );
+
     return res.status(200).json({
       success: true,
       message: "Single property retrieved successfully",
-      data: property,
+      data: {
+        property,
+        userInfo: userInfo || null,
+        agentInfo: agentInfo || null,
+      },
     });
   } catch (error) {
     return res.status(500).json({
