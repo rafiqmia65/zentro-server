@@ -15,3 +15,26 @@ export const createPaymentIntent = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 };
+
+
+
+export const savePayment = async (req, res) => {
+    try {
+        const { amount, currency, cardholderName, TrxID, userEmail, propertyId, createdAt } = req.body;
+
+        const payment = new PaymentModel({
+            amount,
+            currency,
+            cardholderName,
+            TrxID,
+            userEmail,
+            propertyId,
+            createdAt
+        });
+
+        await payment.save();
+        res.status(201).json({ success: true, data: payment });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+};
