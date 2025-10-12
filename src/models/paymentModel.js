@@ -5,6 +5,14 @@ const paymentSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    userEmail: {
+        type: String,
+        required: true
+    },
+    propertyId: {
+        type: String,
+        required: true
+    },
     currency: {
         type: String,
         default: 'USD',
