@@ -5,17 +5,9 @@ import propertyRoutes from "./routes/propertyRoutes.js";
 import AgentRoutes from "./routes/agentRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
+import addToCartRoutes from "./routes/addToCartRoutes.js";
 
 const app = express();
-
-// cors 
-app.use(cors({
-  origin: [
-    "http://localhost:3000",          
-    "https://zentro-place.vercel.app"
-  ],
-  credentials: true,          
-}));
 
 // Middleware
 // Allow requests from your frontend
@@ -33,6 +25,7 @@ app.use("/api/v1/property", propertyRoutes);
 app.use("/api/v1/agent", AgentRoutes);
 app.use("/api/v1/blog", blogRoutes);
 app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/addToCart", addToCartRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Zentro Place Server is Cooking!!" });
