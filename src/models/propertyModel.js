@@ -17,6 +17,10 @@ const propertySchema = new mongoose.Schema(
       required: [true, "Property image is required"],
       trim: true,
     },
+    addedBy:{
+      type: String,
+      required: true,
+    },
     price: {
       type: Number,
       required: [true, "Property price is required"],

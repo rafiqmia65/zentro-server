@@ -187,6 +187,7 @@ export const deleteProperty = async (req, res) => {
   }
 };
 
+
 // get dashboard property
 export const getDashboardProperty = async (req, res) => {
   const role = req?.user?.role;
@@ -194,6 +195,8 @@ export const getDashboardProperty = async (req, res) => {
   const query = {};
 
   if (role === "agent") query.addedBy = email;
+
+
   try {
     // Retrieve all properties sorted by creation date (latest first)
     const allProperty = await PropertyModel.find(query).sort({ createdAt: -1 });
