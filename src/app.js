@@ -13,7 +13,7 @@ const app = express();
 // Allow requests from your frontend
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://zentro-frontend.vercel.app"], // add your frontend URLs
+    origin: ["http://localhost:3000", "https://zentro-place.vercel.app"], // add your frontend URLs
     credentials: true,
   })
 );
