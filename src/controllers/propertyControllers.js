@@ -1,4 +1,4 @@
-import Agent from "../models/agentModel.js";
+import agentModel from "../models/agentModel.js";
 import PropertyModel from "../models/propertyModel.js";
 import userModel from "../models/userModel.js";
 
@@ -101,9 +101,9 @@ export const singleProperty = async (req, res) => {
       .select("-password -__v -createdAt -updatedAt");
 
     // Find agent info by email
-    const agentInfo = await Agent.findOne({ email: addedByEmail }).select(
-      "-password -__v -createdAt -updatedAt"
-    );
+    const agentInfo = await agentModel
+      .findOne({ email: addedByEmail })
+      .select("-password -__v -createdAt -updatedAt");
 
     return res.status(200).json({
       success: true,
@@ -187,17 +187,13 @@ export const deleteProperty = async (req, res) => {
   }
 };
 
-
-
-
-
-// get dashboard property 
+// get dashboard property
 export const getDashboardProperty = async (req, res) => {
-  const role = req?.user?.role
-  const email = req?.user?.email
-  const query = {}
+  const role = req?.user?.role;
+  const email = req?.user?.email;
+  const query = {};
 
-  if (role === 'agent') query.addedBy = email
+  if (role === "agent") query.addedBy = email;
   try {
     // Retrieve all properties sorted by creation date (latest first)
     const allProperty = await PropertyModel.find(query).sort({ createdAt: -1 });
