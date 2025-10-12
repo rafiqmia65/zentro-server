@@ -196,7 +196,6 @@ export const getDashboardProperty = async (req, res) => {
 
   if (role === "agent") query.addedBy = email;
 
-
   try {
     // Retrieve all properties sorted by creation date (latest first)
     const allProperty = await PropertyModel.find(query).sort({ createdAt: -1 });
@@ -220,4 +219,3 @@ export const getDashboardProperty = async (req, res) => {
       message: error.message,
     });
   }
-};
