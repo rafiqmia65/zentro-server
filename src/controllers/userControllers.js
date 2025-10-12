@@ -310,7 +310,7 @@ export const loginUser = async (req, res) => {
     delete userWithoutPassword.password;
 
     // 5. JWT
-    const token = jwt.sign({ email: user.email }, SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ email: user.email, role: user.role, _id: user._id }, SECRET, { expiresIn: "1h" });
     userWithoutPassword.token = token
 
     // 6. Send response with user data (without password)

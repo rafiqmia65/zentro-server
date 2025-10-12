@@ -7,6 +7,7 @@ import {
   getSingleAgent,
   updateAgent,
 } from "../controllers/agentControllers.js";
+import { verifyAdmin } from "../middlewares/adminMiddleware.js";
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.post("/", createAgent);
 // -----------------------------
 // Get all agents
 // -----------------------------
-router.get("/", getAllAgents);
+router.get("/",verifyAdmin, getAllAgents);
 
 // -----------------------------
 // Get a single agent by agentId
@@ -29,16 +30,16 @@ router.get("/:agentId", getSingleAgent);
 // Update agent details
 // Only the agent/admin should do this
 // -----------------------------
-router.patch("/:agentId", updateAgent);
+router.patch("/:agentId",verifyAdmin, updateAgent);
 
 // -----------------------------
 // Delete an agent
 // -----------------------------
-router.delete("/:agentId", deleteAgent);
+router.delete("/:agentId",verifyAdmin, deleteAgent);
 
 // -----------------------------
 // Change agent status (Admin Only)
 // -----------------------------
-router.patch("/status/:agentId", changeAgentStatus);
+router.patch("/status/:agentId",verifyAdmin, changeAgentStatus);
 
 export default router;

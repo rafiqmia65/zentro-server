@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+const { Schema, model, models } = mongoose;
 
-const agentSchema = new mongoose.Schema(
+const agentSchema = new Schema(
   {
     userId: {
       type: String,
@@ -38,5 +39,5 @@ const agentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Agent = mongoose.model("Agent", agentSchema, "agents");
-export default Agent;
+const agentModel = models.Agent || model("Agent", agentSchema);
+export default agentModel;
