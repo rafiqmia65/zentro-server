@@ -16,23 +16,3 @@ export const createPaymentIntent = async (req, res) => {
   }
 };
 
-import PaymentModel from "../models/paymentModel.js";
-
-export const savePayment = async (req, res) => {
-  try {
-    const { amount, currency, cardholderName, TrxID } = req.body;
-
-    const payment = new PaymentModel({
-      amount,
-      currency,
-      cardholderName,
-      TrxID,
-    });
-
-    await payment.save();
-
-    res.status(201).json({ success: true, data: payment });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-};
