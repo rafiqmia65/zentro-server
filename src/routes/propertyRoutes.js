@@ -3,11 +3,14 @@ import {
   createProperty,
   deleteProperty,
   getAllProperty,
+  getDashboardProperty,
   singleProperty,
   updateProperty,
 } from "../controllers/propertyControllers.js";
 
 const router = express.Router();
+
+router.post("/get-dashboard-property", getDashboardProperty);
 
 // Create a new property
 router.post("/add-property", createProperty);
